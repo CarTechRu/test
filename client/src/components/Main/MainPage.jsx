@@ -39,9 +39,11 @@ function MainPage() {
     await subscribe();
   }
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     subscribe();
-  });
+  }, []);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <>
