@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import auctions from './auctions';
+import auctionsReducer from './auctions';
+import filterReducer from './filter';
 
 export default combineReducers({
-  auctions,
+  auctions: auctionsReducer,
+  filter: filterReducer,
 });

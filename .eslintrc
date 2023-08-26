@@ -16,7 +16,8 @@
   ],
   "globals": {
     "window": true,
-    "document": true
+    "document": true,
+    "fetch": false
   },
   "parser": "@babel/eslint-parser"
 }
