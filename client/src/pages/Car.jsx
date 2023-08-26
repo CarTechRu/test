@@ -22,9 +22,11 @@ function Car() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(clear());
     dispatch(searchId(id));
     dispatch(search(""));
+    return () => {
+      dispatch(clear());
+    };
   }, []);
 
   useEffect(() => {
