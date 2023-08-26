@@ -1,6 +1,10 @@
-import { combineReducers } from 'redux';
-import auctions from './auctions';
+import { combineReducers } from "redux";
+import update from "./update";
+import search from "./search";
+import searchId from "./searchId";
 
 export default combineReducers({
-  auctions,
+  update,
+  search,
+  searchId,
 });
