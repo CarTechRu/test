@@ -8,9 +8,10 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
-    "import/no-named-as-default": 0,
-    "no-param-reassign": 0,
-    "no-shadow": "off"
+    "import/no-named-as-default": "off",
+    "no-param-reassign": "off",
+    "no-shadow": "off",
+    "react/prefer-stateless-function": "off"
   },
   "plugins": [
     "react",
