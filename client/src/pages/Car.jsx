@@ -77,9 +77,7 @@ function Car() {
               whiteSpace: 'nowrap',
             }}
           >
-            Пробег:
-            {searchCarId?.mileage}
-            км
+            Пробег: {searchCarId?.mileage} км
           </Typography>
         </Box>
       )}
