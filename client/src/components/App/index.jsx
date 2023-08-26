@@ -1,7 +1,10 @@
 import {
   Box, Container, Divider, Typography,
 } from '@mui/material';
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Auctions from '../Auctions/auctions';
+import InfoCard from '../InfoCard/info-card';
 
 function App() {
   return (
@@ -16,6 +19,12 @@ function App() {
         <Divider />
       </Box>
 
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Auctions />} />
+          <Route path="auction/:id" element={<InfoCard />} />
+        </Routes>
+      </Router>
     </Container>
   );
 }
