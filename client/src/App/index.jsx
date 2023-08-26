@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Car from "../pages/Car";
-import Home from "../pages/Home";
-import Header from "../components/Header";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Car from '../pages/Car';
+import Home from '../pages/Home';
+import Header from '../components/Header';
 
 function App() {
   return (

@@ -6,7 +6,11 @@
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off",
+    "import/no-named-as-default": 0,
+    "no-param-reassign": 0,
+    "no-shadow": "off"
   },
   "plugins": [
     "react",

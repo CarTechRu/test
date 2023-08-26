@@ -6,23 +6,23 @@ import {
   TextField,
   Grid,
   CircularProgress,
-} from "@mui/material";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { update } from "../reducers/update";
-import { search } from "../reducers/search";
-import Card from "../components/Card";
+} from '@mui/material';
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { update } from '../reducers/update';
+import { search } from '../reducers/search';
+import Card from '../components/Card';
 
 const pollingInterval = process.env.CONFIG.POLLING_INTERVAL;
 
 const LinkStyle = {
-  textDecoration: "none",
-  color: "#4B4C48",
+  textDecoration: 'none',
+  color: '#4B4C48',
 };
 
 function Home() {
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
   const [auctions, setAuctions] = useState(null);
   const [loader, setLoader] = useState(false);
 
@@ -38,32 +38,30 @@ function Home() {
   }, [auctions]);
 
   useEffect(() => {
-    //подписка на обновление данных
+    // подписка на обновление данных
     const timer = setInterval(() => dispatch(update()), pollingInterval * 1000);
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(search(searchInput));
-  }, [searchInput]);
+  }, [searchInput, dispatch]);
 
   useEffect(() => {
     if (updateAuctions.length === 0) {
       setAuctions(searchAuctions);
     } else {
       const searchTitle = searchAuctions.map((item) => item.title);
-      const currentAuctions = updateAuctions.filter((item) =>
-        searchTitle.includes(item.title)
-      );
+      const currentAuctions = updateAuctions.filter((item) => searchTitle.includes(item.title));
 
       setAuctions(currentAuctions);
     }
   }, [updateAuctions, searchAuctions]);
 
   return (
-    <Container sx={{ minHeight: "100vh", marginBottom: "100px" }}>
+    <Container sx={{ minHeight: '100vh', marginBottom: '100px' }}>
       <Box mb={3}>
         <Typography mb={1}>Поиск по названию</Typography>
         <TextField
@@ -84,24 +82,21 @@ function Home() {
         {!loader ? (
           <CircularProgress
             sx={{
-              position: "absolute",
+              position: 'absolute',
               top: 0,
               bottom: 0,
               right: 0,
               left: 0,
-              margin: "auto",
-              textAlign: "center",
+              margin: 'auto',
+              textAlign: 'center',
             }}
           />
         ) : (
           auctions?.map((item) => (
             <Grid item xs={2} sm={4} md={4} key={item.id}>
-            <Link
-              style={LinkStyle}
-              to={"/" + item.id}
-            >
-              <Card item={item} />
-            </Link>
+              <Link style={LinkStyle} to={`/${item.id}`}>
+                <Card item={item} />
+              </Link>
             </Grid>
           ))
         )}
