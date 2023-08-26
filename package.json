@@ -5,6 +5,9 @@
   "private": true,
   "author": "cartech team",
   "license": "ISC",
+  "resolutions": {
+    "caniuse-lite": "*"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "echo \"There is no build here\" && exit 1",
