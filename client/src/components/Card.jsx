@@ -2,7 +2,7 @@ import {
   Box, Typography, CardMedia, Grid,
 } from '@mui/material';
 import moment from 'moment';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 
 const imagesBasePath = process.env.CONFIG.IMAGES_BASEPATH;
 
@@ -12,7 +12,7 @@ const TypographyStyle = {
   whiteSpace: 'nowrap',
 };
 
-function Card({ item }) {
+const Card = memo(({ item }) => {
   const {
     title, bid, finishTime, imgUrl,
   } = item;
@@ -99,6 +99,6 @@ function Card({ item }) {
       </Box>
     </Box>
   );
-}
+});
 
 export default Card;

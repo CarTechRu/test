@@ -38,7 +38,6 @@ function Home() {
   }, [auctions]);
 
   useEffect(() => {
-    // подписка на обновление данных
     const timer = setInterval(() => dispatch(update()), pollingInterval * 1000);
     return () => {
       clearInterval(timer);
