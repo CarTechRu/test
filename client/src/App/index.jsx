@@ -1,22 +1,20 @@
-import {
-  Box, Container, Divider, Typography,
-} from '@mui/material';
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Layout from '../components/Layout';
+
+const Home = React.lazy(() => import(/* webpackChunkName: "Home" */ '../pages/Home'));
+const Car = React.lazy(() => import(/* webpackChunkName: "Car" */ '../pages/Car'));
 
 function App() {
   return (
-    <Container>
-      <Box mt={3} mb={2}>
-        <Typography variant="h1" fontSize="h3.fontSize">
-          Тестовое приложение Аукционы
-        </Typography>
-      </Box>
-
-      <Box mb={3}>
-        <Divider />
-      </Box>
-
-    </Container>
+    <Suspense fallback={<div>Загрузка</div>}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/:car" element={<Car />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }
 
