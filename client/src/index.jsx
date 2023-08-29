@@ -3,17 +3,17 @@ import 'regenerator-runtime/runtime';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import store from './store';
-import App from './App';
+import App from './components/App';
+import store from './redux/store';
 
 const theme = createTheme();
 
 render(
   <ThemeProvider theme={theme}>
+    <CssBaseline />
     <Provider store={store}>
-      <CssBaseline />
       <App />
     </Provider>
   </ThemeProvider>,

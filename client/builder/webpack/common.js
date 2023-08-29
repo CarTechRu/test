@@ -62,5 +62,6 @@ module.exports = {
   output: {
     path: path.join(DIR, 'build'),
     filename: 'index.js',
+    publicPath: '/',
   },
 };
