@@ -1,41 +1,33 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography } from '@mui/material';
 
-import axios from 'axios';
+import { useGetCarQuery } from '../../redux/api';
 
-import { apiRoutes } from '../../routes/routes';
+const imagePath = process.env.CONFIG.IMAGES_BASEPATH;
 
 function AuctionPage() {
   const { id } = useParams();
-  const [auction, setAuction] = useState();
 
-  useEffect(() => {
-    async function fetchData() {
-      await axios.get(`${apiRoutes.auctionPath(id)}`)
-        .then((res) => res.data.auction)
-        .then((data) => setAuction(data));
-    }
-
-    fetchData();
-  }, [id]);
+  const {
+    data: car,
+  } = useGetCarQuery(+id);
 
   return (
     <Box mt={2} mb={2}>
-      {auction && (
+      {car && (
       <>
         <Typography variant="subtitle1" mb={2}>
-          {`Подробная информация об автомобиле ${auction.title}`}
+          {`Подробная информация об автомобиле ${car.auction.title}`}
         </Typography>
         <img
-          src={`${apiRoutes.imagePath()}${auction.imgUrl}`}
-          alt={auction.title}
+          src={`${imagePath}${car.auction.imgUrl}`}
+          alt={car.auction.title}
           loading="lazy"
           width="400"
           height="300"
         />
         <Typography variant="subtitle1" mt={2}>
-          {`Пробег: ${auction.mileage} км`}
+          {`Пробег: ${car.auction.mileage} км`}
         </Typography>
       </>
       )}

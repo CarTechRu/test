@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Countdown, { zeroPad } from 'react-countdown';
 import { DebounceInput } from 'react-debounce-input';
@@ -14,36 +13,33 @@ import {
   Skeleton,
   Typography,
 } from '@mui/material';
+import { useRef } from 'react';
 
-import axios from 'axios';
+import { useGetCarsQuery, useSearchCarQuery } from '../../redux/api';
 
-import { apiRoutes } from '../../routes/routes';
+const imagePath = process.env.CONFIG.IMAGES_BASEPATH;
+const timeInterval = process.env.CONFIG.POLLING_INTERVAL;
 
-function Loader() {
+function Loading() {
   return (
     <Skeleton animation="wave" variant="circular" width={40} height={40} />
   );
 }
 
 function MainPage() {
-  const timeInterval = process.env.CONFIG.POLLING_INTERVAL;
-  const [state, setState] = useState();
+  const inputRef = useRef();
+  const arg = '';
 
-  async function subscribe() {
-    const { data } = await axios.get(`${apiRoutes.dataPath()}`);
+  const {
+    data: cars,
+    isLoading,
+  } = useGetCarsQuery(arg, { pollingInterval: timeInterval * 1000 });
+  const {
+    data: filteredCars,
+    refetch,
+  } = useSearchCarQuery(inputRef.current?.state.value);
 
-    setState(data.auctions);
-
-    // eslint-disable-next-line no-promise-executor-return
-    await new Promise((resolve) => setTimeout(resolve, timeInterval * 1000));
-    await subscribe();
-  }
-
-  /* eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => {
-    subscribe();
-  }, []);
-  /* eslint-enable react-hooks/exhaustive-deps */
+  const currentData = filteredCars ?? cars;
 
   return (
     <>
@@ -60,17 +56,10 @@ function MainPage() {
         <FormControl>
           <DebounceInput
             placeholder="Введите текст"
-            multiline
-            maxRows={4}
             size="small"
             debounceTimeout={500}
-            onChange={async (e) => {
-              const { value } = e.target;
-
-              const searchData = await axios.get(apiRoutes.searchPath(value));
-
-              setState(searchData.data.auctions);
-            }}
+            ref={inputRef}
+            onChange={refetch}
           />
         </FormControl>
       </Box>
@@ -78,7 +67,8 @@ function MainPage() {
         <Divider />
       </Box>
       <Grid container sx={{ width: 950 }} spacing={2} columns={15}>
-        {(!state) ? <Loader /> : state.map(({
+        {isLoading && <Loading />}
+        {currentData && currentData.auctions.map(({
           title, id, imgUrl, finishTime, bid,
         }) => (
           <Grid item xs={5} key={id}>
@@ -92,7 +82,7 @@ function MainPage() {
                   />
                   <CardMedia
                     component="img"
-                    image={`${apiRoutes.imagePath()}${imgUrl}`}
+                    image={`${imagePath}${imgUrl}`}
                     height="180"
                     width="180"
                   />
