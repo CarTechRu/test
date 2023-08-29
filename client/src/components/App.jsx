@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import { routes } from '../routes/routes';
+import routes from '../routes/routes';
 import NotFoundPage from './NotFound/NotFoundPage';
 import MainPage from './Main/MainPage';
 import AuctionPage from './Auction/AuctionPage';

@@ -2,7 +2,7 @@ import {
   Box, Link, Typography,
 } from '@mui/material';
 
-import { routes } from '../../routes/routes';
+import routes from '../../routes/routes';
 
 function NotFoundPage() {
   return (
