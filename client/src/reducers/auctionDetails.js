@@ -1,29 +1,23 @@
 import * as types from '../constants/actions';
 
 const initState = {
+  info: {},
   loading: false,
-  searchParam: '',
-  cars: [],
 };
 
 // eslint-disable-next-line default-param-last
-const auctions = (state = initState, action) => {
+const auctionDetails = (state = initState, action) => {
   switch (action.type) {
-    case types.CHANGE_SEARCH_PARAM:
-      return {
-        ...state,
-        searchParam: action.payload,
-      };
-    case types.START_LOADING_AUCTIONS:
+    case types.START_LOADING_DETAILS:
       return {
         ...state,
         loading: true,
       };
-    case types.FINISH_LOADING_AUCTIONS:
+    case types.FINISH_LOADING_DETAILS:
       return {
         ...state,
         loading: false,
-        cars: action.payload,
+        info: action.payload,
       };
     default: {
       return { ...state };
@@ -31,4 +25,4 @@ const auctions = (state = initState, action) => {
   }
 };
 
-export default auctions;
+export default auctionDetails;
