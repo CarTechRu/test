@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import store from './store';
-import App from './App';
+import App from './components/App';
 
 const theme = createTheme();
 
